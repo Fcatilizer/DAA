@@ -1,61 +1,41 @@
-// Insertion sort in C
-
 #include <stdio.h>
+#include <stdlib.h>
 
-// Function to print an array
+void pA(int *, int *);
+void sort(int *, int *);
 
-void printArray(int array[], int size) {
-
-  for (int i = 0; i < size; i++) {
-
-    printf("%d ", array[i]);
-
-  }
-
-  printf("\n");
-
+void main()
+{
+    int arr[] = {5, 6, 2, 11, 4, 1, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    sort(arr, &n);
+    printf("\n\n\n");
+    pA(arr, &n);
 }
 
-void insertionSort(int array[], int size) {
-
-  for (int step = 1; step < size; step++) {
-
-    int key = array[step];
-
-    int j = step - 1;
-
-    // Compare key with each element on the left of it until an element smaller than
-
-    // it is found.
-
-    // For descending order, change key<array[j] to key>array[j].
-
-    while (key < array[j] && j >= 0) {
-
-      array[j + 1] = array[j];
-
-      --j;
-
+void sort(int *arr, int *n)
+{
+    int i, j, key;
+    for (i = 1; i < *n; i++)
+    {
+        key = arr[i];
+        for (j = i - 1; j >= 0 ; j--)
+        {
+            if ( key > arr[j]) {
+                break;
+            }
+            arr[j + 1] = arr[j];
+        }
+        arr[j + 1] = key;
     }
-
-    array[j + 1] = key;
-
-  }
-
 }
 
-// Driver code
-
-int main() {
-
-  int data[] = {9, 5, 1, 4, 3};
-
-  int size = sizeof(data) / sizeof(data[0]);
-
-  insertionSort(data, size);
-
-  printf("Sorted array in ascending order:\n");
-
-  printArray(data, size);
-
+void pA(int *arr, int *n)
+{
+    int i = 0;
+    for (i; i < *n; i++)
+    {
+        printf("%d ", *(arr + i));
+    }
+    printf("\n");
 }
